@@ -2,16 +2,27 @@ package com.udacity.sandwichclub.utils;
 
 import com.udacity.sandwichclub.model.Sandwich;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public final class JsonUtils {
 
 
-    public static Sandwich parseSandwichJson(String json) {
+    public static Sandwich parseSandwichJson(String json) throws JSONException {
 
 
-        return null;
+        JSONObject sandwichObject = new JSONObject(json);
+        JSONObject jObjectName = sandwichObject.getJSONObject("name");
+
+        String name = jObjectName.getString("mainName");
+        String image = sandwichObject.getString("image");
+
+
+
+
+
+        return new Sandwich(name, image);
     }
 
 
