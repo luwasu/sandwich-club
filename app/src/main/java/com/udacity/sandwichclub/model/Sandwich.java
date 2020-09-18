@@ -15,7 +15,8 @@ public class Sandwich {
      * No args constructor for use in serialization
      */
 
-    public Sandwich(String mainName, String image,String placeOfOrigin) {
+    public Sandwich(String mainName, String image,String placeOfOrigin, String description) {
+        this.description = description;
         this.placeOfOrigin = placeOfOrigin;
         this.mainName = mainName;
         this.image = image;

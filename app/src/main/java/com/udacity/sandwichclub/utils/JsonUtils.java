@@ -20,9 +20,11 @@ public final class JsonUtils {
         String name = jObjectName.getString("mainName");
         String image = sandwichObject.getString("image");
         String origin = sandwichObject.getString("placeOfOrigin");
+        String description = sandwichObject.getString("description");
 
 
-        return new Sandwich(name, image, origin);
+
+        return new Sandwich(name, image, origin, description);
     }
 
 

@@ -89,5 +89,8 @@ public class DetailActivity extends AppCompatActivity {
         TextView originTv = findViewById(R.id.origin_tv);
         originTv.setText(fetchSandwichDetails().getPlaceOfOrigin());
 
+        TextView descriptionTv = findViewById(R.id.description_tv);
+        descriptionTv.setText(fetchSandwichDetails().getDescription());
+
     }
 }
