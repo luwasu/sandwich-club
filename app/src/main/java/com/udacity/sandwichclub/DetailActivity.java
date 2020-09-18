@@ -14,6 +14,8 @@ import org.json.JSONException;
 
 public class DetailActivity extends AppCompatActivity {
 
+    private ImageView ingredientsIv;
+
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
@@ -22,7 +24,32 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        ImageView ingredientsIv = findViewById(R.id.image_iv);
+        intent();
+        fetchSandwichDetails();
+        setupDefaultUIFramework();
+
+
+
+    }
+
+    private Sandwich fetchSandwichDetails() {
+        String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
+        String json = sandwiches[intent()];
+        Sandwich sandwich = null;
+        try {
+            sandwich = JsonUtils.parseSandwichJson(json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (sandwich == null) {
+            // Sandwich data unavailable
+            closeOnError();
+
+        }
+        return sandwich;
+    }
+
+    private int intent() {
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -33,34 +60,28 @@ public class DetailActivity extends AppCompatActivity {
         if (position == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
             closeOnError();
-            return;
-        }
 
-        String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
-        String json = sandwiches[position];
-        Sandwich sandwich = null;
-        try {
-            sandwich = JsonUtils.parseSandwichJson(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        if (sandwich == null) {
-            // Sandwich data unavailable
-            closeOnError();
-            return;
-        }
-
-        populateUI();
-        Picasso.with(this)
-                .load(sandwich.getImage())
-                .into(ingredientsIv);
-
-        setTitle(sandwich.getMainName());
+        return position;
     }
+
 
     private void closeOnError() {
         finish();
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setupDefaultUIFramework(){
+
+        ImageView ingredientsIv = findViewById(R.id.image_iv);
+
+        populateUI();
+        Picasso.with(this)
+                .load(fetchSandwichDetails().getImage())
+                .into(ingredientsIv);
+
+        setTitle(fetchSandwichDetails().getMainName());
+
     }
 
     private void populateUI() {

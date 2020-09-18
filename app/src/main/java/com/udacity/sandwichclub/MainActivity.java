@@ -15,9 +15,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        listView();
+    }
+
+
+    public void listView() {
+
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_names);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, sandwiches);
+
 
         // Simplification: Using a ListView instead of a RecyclerView
         ListView listView = findViewById(R.id.sandwiches_listview);
