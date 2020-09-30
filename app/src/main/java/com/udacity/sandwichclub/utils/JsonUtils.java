@@ -19,35 +19,53 @@ public final class JsonUtils {
     public JSONArray alsoKnownAs;
 
 
-    public static Sandwich parseSandwichJson(String json) throws JSONException {
+    public static Sandwich parseSandwichJson(String json) {
 
-
-        JSONObject sandwichObject = new JSONObject(json);
-        JSONObject jObjectName = sandwichObject.getJSONObject("name");
-
-        String name = jObjectName.getString("mainName");
-        String image = sandwichObject.getString("image");
-        String origin = sandwichObject.getString("placeOfOrigin");
-        String description = sandwichObject.getString("description");
-
-        List<String> alsoKnowAs = new ArrayList<>();
-        JSONArray alsoKnownAsArray = jObjectName.getJSONArray("alsoKnownAs");
-        for (int i = 0; i < alsoKnownAsArray.length(); i++) {
-            String n = (String) alsoKnownAsArray.get(i);
-            alsoKnowAs.add(n);
-            Log.v(TAG, "also known as: " + n);
+        if (json == null) {
+            return null;
         }
 
-        List<String> ingredients = new ArrayList<>();
-        JSONArray ingredientsArray = sandwichObject.getJSONArray("ingredients");
-        for (int i = 0; i < ingredientsArray.length(); i++) {
-            String n = (String) ingredientsArray.get(i);
-            ingredients.add(n);
-            Log.v(TAG, "ingredients: " + n);
+        try {
+            JSONObject sandwichObject = new JSONObject(json);
+            JSONObject jObjectName = sandwichObject.getJSONObject("name");
+
+            String name = jObjectName.getString("mainName");
+            String image = sandwichObject.getString("image");
+            String origin = sandwichObject.getString("placeOfOrigin");
+            String description = sandwichObject.getString("description");
+
+
+            JSONArray alsoKnownAsArray = jObjectName.getJSONArray("alsoKnownAs");
+            List<String> alsoKnowAs = new ArrayList<>();
+            if (alsoKnownAsArray != null) {
+                for (int i = 0; i < alsoKnownAsArray.length(); i++) {
+                    String n = (String) alsoKnownAsArray.get(i);
+                    alsoKnowAs.add(n);
+                    Log.v(TAG, "also known as: " + n);
+                }
+            }
+
+            JSONArray ingredientsArray = sandwichObject.getJSONArray("ingredients");
+            List<String> ingredients = new ArrayList<>();
+            if (ingredientsArray != null) {
+                for (int i = 0; i < ingredientsArray.length(); i++) {
+                    String n = (String) ingredientsArray.get(i);
+                    ingredients.add(n);
+
+
+
+                    Log.v(TAG, "ingredients: " + n);
+                }
+            }
+
+            return new Sandwich(name, image, origin, description, alsoKnowAs, ingredients);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return null;
 
 
-        return new Sandwich(name, image, origin, description, alsoKnowAs, ingredients);
     }
 
 

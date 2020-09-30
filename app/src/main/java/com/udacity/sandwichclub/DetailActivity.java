@@ -36,11 +36,7 @@ public class DetailActivity extends AppCompatActivity {
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[intent()];
         Sandwich sandwich = null;
-        try {
-            sandwich = JsonUtils.parseSandwichJson(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        sandwich = JsonUtils.parseSandwichJson(json);
         if (sandwich == null) {
             // Sandwich data unavailable
             closeOnError();
@@ -60,7 +56,6 @@ public class DetailActivity extends AppCompatActivity {
         if (position == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
             closeOnError();
-
         }
         return position;
     }
@@ -93,10 +88,10 @@ public class DetailActivity extends AppCompatActivity {
         descriptionTv.setText(fetchSandwichDetails().getDescription());
 
         TextView alsoKnownAsTv = findViewById(R.id.also_known_tv);
-        alsoKnownAsTv.setText(fetchSandwichDetails().getAlsoKnownAs().toString());
+        alsoKnownAsTv.setText(fetchSandwichDetails().getAlsoKnownAs().toString().replaceAll("(^\\[|\\]$)", ""));
 
         TextView ingredientsTv = findViewById(R.id.ingredients_tv);
-        ingredientsTv.setText(fetchSandwichDetails().getIngredients().toString());
+        ingredientsTv.setText(fetchSandwichDetails().getIngredients().toString().replaceAll("(^\\[|\\]$)", ""));
 
     }
 }
