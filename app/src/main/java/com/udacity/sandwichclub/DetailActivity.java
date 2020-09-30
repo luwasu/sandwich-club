@@ -18,7 +18,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
     private ImageView ingredientsIv;
-    private TextView alsoKnownAs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +91,12 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView descriptionTv = findViewById(R.id.description_tv);
         descriptionTv.setText(fetchSandwichDetails().getDescription());
+
+        TextView alsoKnownAsTv = findViewById(R.id.also_known_tv);
+        alsoKnownAsTv.setText(fetchSandwichDetails().getAlsoKnownAs().toString());
+
+        TextView ingredientsTv = findViewById(R.id.ingredients_tv);
+        ingredientsTv.setText(fetchSandwichDetails().getIngredients().toString());
 
     }
 }

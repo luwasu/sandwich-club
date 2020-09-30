@@ -15,11 +15,13 @@ public class Sandwich {
      * No args constructor for use in serialization
      */
 
-    public Sandwich(String mainName, String image,String placeOfOrigin, String description) {
+    public Sandwich(String mainName, String image,String placeOfOrigin, String description, List<String> alsoKnownAs, List<String> ingredients) {
+        this.alsoKnownAs = alsoKnownAs;
         this.description = description;
         this.placeOfOrigin = placeOfOrigin;
         this.mainName = mainName;
         this.image = image;
+        this.ingredients = ingredients;
     }
 
 
@@ -79,4 +81,6 @@ public class Sandwich {
     public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
+
+
 }
