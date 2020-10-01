@@ -32,18 +32,28 @@ public final class JsonUtils {
             String name = jObjectName.getString("mainName");
             String image = sandwichObject.getString("image");
             String origin = sandwichObject.getString("placeOfOrigin");
+
+            if (origin.equals("")) {
+                origin = "Unknown";
+            }
+
+
             String description = sandwichObject.getString("description");
 
 
             JSONArray alsoKnownAsArray = jObjectName.getJSONArray("alsoKnownAs");
             List<String> alsoKnowAs = new ArrayList<>();
-            if (alsoKnownAsArray != null) {
-                for (int i = 0; i < alsoKnownAsArray.length(); i++) {
-                    String n = (String) alsoKnownAsArray.get(i);
-                    alsoKnowAs.add(n);
-                    Log.v(TAG, "also known as: " + n);
-                }
+
+            if (alsoKnownAsArray.length() == 0) {
+                alsoKnowAs.add("No other name is known");
+            } else {
             }
+            for (int i = 0; i < alsoKnownAsArray.length(); i++) {
+                String n = (String) alsoKnownAsArray.get(i);
+                alsoKnowAs.add(n);
+                Log.v(TAG, "also known as: " + n);
+            }
+
 
             JSONArray ingredientsArray = sandwichObject.getJSONArray("ingredients");
             List<String> ingredients = new ArrayList<>();
@@ -51,22 +61,17 @@ public final class JsonUtils {
                 for (int i = 0; i < ingredientsArray.length(); i++) {
                     String n = (String) ingredientsArray.get(i);
                     ingredients.add(n);
-
-
-
                     Log.v(TAG, "ingredients: " + n);
                 }
             }
 
             return new Sandwich(name, image, origin, description, alsoKnowAs, ingredients);
 
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         return null;
-
-
     }
-
-
 }
