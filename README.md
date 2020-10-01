@@ -1,8 +1,14 @@
 # Sandwich Club Project Starter Code
 
+
+## Project Student Final
+
+![Peek 2020-10-01 08-44](https://user-images.githubusercontent.com/40022621/94776722-8253c980-03c2-11eb-9550-0ef14202e357.gif)
+
 ## Project Overview
 In this project, you will complete the **Sandwich Club** app to
-show the details of each sandwich once it is selected.
+show the details of each sandwich once it is selected
+
 
 ## Why this Project
 
