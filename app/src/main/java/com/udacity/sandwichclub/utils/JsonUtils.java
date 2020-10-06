@@ -15,6 +15,13 @@ import java.util.List;
 public final class JsonUtils {
 
     private static final String TAG = "JsonUtils";
+    private static final String JSON_KEY = "name";
+    private static final String JSON_MAIN_NAME = "mainName";
+    private static final String JSON_IMAGE = "image";
+    private static final String JSON_ORIGIN = "placeOfOrigin";
+    private static final String JSON_DESCRIPTION = "description";
+    private static final String JSON_ARRAY_ALSO_KNOWN = "alsoKnownAs";
+    private static final String JSON_ARRAY_INGREDIENTS = "ingredients";
 
     public JSONArray alsoKnownAs;
 
@@ -27,21 +34,22 @@ public final class JsonUtils {
 
         try {
             JSONObject sandwichObject = new JSONObject(json);
-            JSONObject jObjectName = sandwichObject.getJSONObject("name");
+            JSONObject jObjectName = sandwichObject.getJSONObject(JSON_KEY);
 
-            String name = jObjectName.getString("mainName");
-            String image = sandwichObject.getString("image");
-            String origin = sandwichObject.getString("placeOfOrigin");
+            String name = jObjectName.getString(JSON_MAIN_NAME);
+
+            String image = sandwichObject.getString(JSON_IMAGE);
+            String origin = sandwichObject.getString(JSON_ORIGIN);
 
             if (origin.equals("")) {
                 origin = "Unknown";
             }
 
 
-            String description = sandwichObject.getString("description");
+            String description = sandwichObject.getString(JSON_DESCRIPTION);
 
 
-            JSONArray alsoKnownAsArray = jObjectName.getJSONArray("alsoKnownAs");
+            JSONArray alsoKnownAsArray = jObjectName.getJSONArray(JSON_ARRAY_ALSO_KNOWN);
             List<String> alsoKnowAs = new ArrayList<>();
 
             if (alsoKnownAsArray.length() == 0) {
@@ -55,7 +63,7 @@ public final class JsonUtils {
             }
 
 
-            JSONArray ingredientsArray = sandwichObject.getJSONArray("ingredients");
+            JSONArray ingredientsArray = sandwichObject.getJSONArray(JSON_ARRAY_INGREDIENTS);
             List<String> ingredients = new ArrayList<>();
             if (ingredientsArray != null) {
                 for (int i = 0; i < ingredientsArray.length(); i++) {
