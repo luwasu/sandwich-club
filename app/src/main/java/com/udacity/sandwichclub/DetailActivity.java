@@ -3,6 +3,7 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,10 +88,9 @@ public class DetailActivity extends AppCompatActivity {
         descriptionTv.setText(fetchSandwichDetails().getDescription());
 
         TextView alsoKnownAsTv = findViewById(R.id.also_known_tv);
-        alsoKnownAsTv.setText(fetchSandwichDetails().getAlsoKnownAs().toString().replaceAll("(^\\[|\\]$)", ""));
+        alsoKnownAsTv.setText(TextUtils.join(", ", fetchSandwichDetails().getAlsoKnownAs()));
 
-        TextView ingredientsTv = findViewById(R.id.ingredients_tv);
-        ingredientsTv.setText(fetchSandwichDetails().getIngredients().toString().replaceAll("(^\\[|\\]$)", ""));
-
+        TextView ingredientsTv = findViewById(R.id.ingredients_tv);;
+        ingredientsTv.setText(TextUtils.join(", ", fetchSandwichDetails().getIngredients()));
     }
 }

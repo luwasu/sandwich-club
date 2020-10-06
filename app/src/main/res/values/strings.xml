@@ -22,6 +22,7 @@
         anim id est laborum.</string>
 
     <string name="lorem_ipsum_short">Lorem ipsum dolor</string>
+    <string name="no_other_name">No other name is known</string>
 
 
     <string-array name="sandwich_names">

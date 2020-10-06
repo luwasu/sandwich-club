@@ -49,7 +49,7 @@ public final class JsonUtils {
             String description = sandwichObject.getString(JSON_DESCRIPTION);
 
 
-            JSONArray alsoKnownAsArray = jObjectName.getJSONArray(JSON_ARRAY_ALSO_KNOWN);
+            JSONArray alsoKnownAsArray = jObjectName.optJSONArray(JSON_ARRAY_ALSO_KNOWN);
             List<String> alsoKnowAs = new ArrayList<>();
 
             if (alsoKnownAsArray.length() == 0) {
