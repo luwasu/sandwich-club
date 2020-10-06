@@ -1,7 +1,9 @@
 package com.udacity.sandwichclub.utils;
 
+import android.content.res.Resources;
 import android.util.Log;
 
+import com.udacity.sandwichclub.R;
 import com.udacity.sandwichclub.model.Sandwich;
 
 import org.json.JSONArray;
@@ -22,8 +24,10 @@ public final class JsonUtils {
     private static final String JSON_DESCRIPTION = "description";
     private static final String JSON_ARRAY_ALSO_KNOWN = "alsoKnownAs";
     private static final String JSON_ARRAY_INGREDIENTS = "ingredients";
+    private static final String NO_OTHER_NAME = "No other name known";
 
-    public JSONArray alsoKnownAs;
+
+
 
 
     public static Sandwich parseSandwichJson(String json) {
@@ -53,7 +57,7 @@ public final class JsonUtils {
             List<String> alsoKnowAs = new ArrayList<>();
 
             if (alsoKnownAsArray.length() == 0) {
-                alsoKnowAs.add("No other name is known");
+                alsoKnowAs.add(NO_OTHER_NAME);
             } else {
             }
             for (int i = 0; i < alsoKnownAsArray.length(); i++) {
